@@ -38,5 +38,5 @@ X_dev = scaler.transform(X_dev)
 classifiers = [(QuadraticDiscriminantAnalysis(), "QDA")]
 for clf, name in classifiers:
 	clf.fit(X_train, y_train)
-	print("Model {0: <30} \t Score {}".format(name, clf.score(X_dev, y_dev)))
+	print(name, clf.score(X_dev, y_dev))
 	sys.stdout.flush()
