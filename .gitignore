@@ -1,3 +1,7 @@
 data/asl-alphabet
 .DS_Store
+data
+*.pyc
+*.out
+__pycache__
 
