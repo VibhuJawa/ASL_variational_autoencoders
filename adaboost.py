@@ -4,6 +4,7 @@ from sklearn.model_selection import train_test_split
 import utils
 from sklearn.ensemble import AdaBoostClassifier
 import sys
+from sklearn.preprocessing import StandardScaler
 
 data_dir = "/home-4/vjawa1@jhu.edu/data/data_mining_project/variational_autoencoders/data/asl-alphabet"
 
