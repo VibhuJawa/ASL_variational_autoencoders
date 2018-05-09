@@ -3,51 +3,49 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 import utils
 from sklearn.preprocessing import StandardScaler
-from sklearn.ensemble import GradientBoostingClassifier, AdaBoostClassifier
+from sklearn.ensemble import GradientBoostingClassifier, RandomForestClassifier, AdaBoostClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
-from sklearn.linear_model import SGDClassifier, PassiveAggressiveClassifier
+from sklearn.linear_model import SGDClassifier, Perceptron, PassiveAggressiveClassifier
 import pickle
 import sys
-
-data_dir = "/home-4/vjawa1@jhu.edu/data/data_mining_project/variational_autoencoders/data/asl-alphabet"
-
-# Get train and test directories
-train_dir = os.path.join(data_dir, 'asl_alphabet_train_compressed')
-test_dir = os.path.join(data_dir, 'asl_alphabet_test_compressed')
-
-# Get list of labels
-train_label_dirs = os.listdir(train_dir)
-if '.DS_Store' in train_label_dirs: train_label_dirs.remove('.DS_Store')
-
-# Create a label dictionary to map labels to ids
-label_dict = utils.create_y_ids(train_label_dirs)
+from config import data_dir
 
 # Create train set
-X_train, Y_train = utils.get_data(train_label_dirs, train_dir, label_dict)
+with open(os.path.join(data_dir, 'train_set.p'), 'rb') as filename:
+    content = pickle.load(filename)
+X_train, y_train = content['data'], content['labels']
 
-# Create splits train and dev
-X_train, X_dev, y_train, y_dev = train_test_split(X_train, Y_train, test_size=0.33, random_state=42)
+# Create val set
+with open(os.path.join(data_dir, 'val_set.p'), 'rb') as filename:
+    content = pickle.load(filename)
+X_val, y_val = content['data'], content['labels']
+
+# Create val set
+with open(os.path.join(data_dir, 'test_set.p'), 'rb') as filename:
+    content = pickle.load(filename)
+X_test, y_test = content['data'], content['labels']
+
 
 # Create a preprocessor
 scaler = StandardScaler()
 scaler.fit(X_train)
 X_train = scaler.transform(X_train)
-X_dev = scaler.transform(X_dev)
+X_val = scaler.transform(X_val)
 
 
 # Set up list of classifiers
 
 classifiers = [(SGDClassifier(loss='hinge'), "Hinge Loss"), 
 		(SGDClassifier(loss='log'), "Log Loss"),
-		(GradientBoostingClassifier(), "Gradient Boosting"),
-		(AdaBoostClassifier(), "AdaBoost"),
 		(PassiveAggressiveClassifier(), "Passive Aggressive - Hinge"),
+		(AdaBoostClassifier(), "AdaBoost"),
 		(Perceptron(penalty='l2'), "Perceptron L2"),
 		(RandomForestClassifier(n_jobs=-1), "Random Forest"),
-		(QuadraticDiscriminantAnalysis(), "QDA")]
+		(QuadraticDiscriminantAnalysis(), "QDA"),
+		(GradientBoostingClassifier(), "Gradient Boosting")]
 
 for clf, name in classifiers:
-	clf.fit(X_train)
-	print(name, clf.score(X_dev, y_dev))
+	clf.fit(X_train, y_train)
+	print(name, clf.score(X_val, y_val), clf.score(X_train, y_train))
 	sys.stdout.flush()
