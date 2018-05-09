@@ -47,13 +47,13 @@ classifiers = [(SGDClassifier(loss='hinge'), "Hinge Loss"),
                (QuadraticDiscriminantAnalysis(), "QDA"),
                (GradientBoostingClassifier(), "Gradient Boosting")]
 
-algorithms = [(PCA, "PCA"),
+algorithms = [(PCA(), "PCA"),
               (IncrementalPCA(), "IncrementalPCA"),
               (FactorAnalysis(), "FactorAnalysis"),
               ]
 
 for n in n_components:
-    for algorithm, name in algorithms:
+    for algorithm, aname in algorithms:
 
         # Set components as n
         algorithm.n_components = n
@@ -68,5 +68,5 @@ for n in n_components:
 
         for clf, name in classifiers:
             clf.fit(X_train_new, y_train)
-            print(name, clf.score(X_train_new, y_train), clf.score(X_val_new, y_val), clf.score(X_test_new, y_test))
+            print(aname, n, name, clf.score(X_train_new, y_train), clf.score(X_val_new, y_val), clf.score(X_test_new, y_test))
             sys.stdout.flush()
