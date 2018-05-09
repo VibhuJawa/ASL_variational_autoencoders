@@ -1,3 +1,4 @@
+*.p
 .ipynb_checkpoints
 .idea
 data/asl-alphabet
