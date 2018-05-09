@@ -5,6 +5,8 @@ import utils
 from sklearn.ensemble import AdaBoostClassifier
 import sys
 from sklearn.preprocessing import StandardScaler
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 data_dir = "/home-4/vjawa1@jhu.edu/data/data_mining_project/variational_autoencoders/data/asl-alphabet"
 
