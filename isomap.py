@@ -11,7 +11,7 @@ import pickle
 import sys
 from config import data_dir
 from sklearn.externals import joblib
-from sklearn.manifold import Isomap, SpectralEmbedding
+from sklearn.manifold import Isomap, LocallyLinearEmbedding
 
 n_components = [392, 196, 98, 49, 24, 12, 6]
 
@@ -47,21 +47,16 @@ classifiers = [(SGDClassifier(loss='hinge'), "Hinge Loss"),
                (GradientBoostingClassifier(), "Gradient Boosting")]
 
 algorithms = [
-    (Isomap(), "IsomapEmbedding"),
-    (SpectralEmbedding(), "SpectralEmbedding"),
+    (Isomap(n_neighbors=5, n_jobs=-1), "IsomapEmbedding"),
+    (LocallyLinearEmbedding(n_neigbors=5, n_jobs=-1), "LocallyLinear"),
 ]
 
 for n in n_components:
     for algorithm, aname in algorithms:
 
+
         # Set components as n
         algorithm.n_components = n
-        if (aname == "IsomapEmbedding"):
-            algorithm.n_neighbors = 30000
-
-        elif (aname == "SpectralEmbedding"):
-            algorithm.random_state = 0
-            eigen_solver = "arpack"
 
         # Fit the DR
         X_train_new = algorithm.fit_transform(X_train)
