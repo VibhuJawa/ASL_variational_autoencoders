@@ -17,10 +17,11 @@ help us get an estimate of how well does our model generalize.
 * All the images in the dataset are in grayscale with and only 28 x 28 in dimension. We scale all our images
 to have zero mean and unit standard deviation.
 
-# Achievable Accuracies
+# Benchamrk Accuracy
 The output of the algorithm is the classification accuracy achieved on 24 classes.
 * A random classifier would score nearly 4%.
-* A majority classifier would label everything E, thus giving 11%. All our models perform better than these models, with the worst model giving accuracies in the range of 85%, after dimensionality reduction.
+* A majority classifier would label everything E, thus giving 11%. 
+* All our models perform better than these models, with the worst model giving accuracies in the range of 85%, after dimensionality reduction.
 
 # Methods and Models
 
