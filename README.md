@@ -24,20 +24,31 @@ The output of the algorithm is the classification accuracy achieved on 24 classe
 
 # Methods and Models
 
-We utilized multiple classifiers include SGD Classifier using both Hinge Loss and Log Loss,
-Gradient Boosting, AdaBoost, Passive Aggressive, Perception, Random Forest and QDA.
+We utilized multiple classifiers including:
+* SGD Classifier using both Hinge Loss and Log Loss
+* Gradient Boosting
+* AdaBoost 
+* Passive Aggressive
+* Random Forest
+* QDA.
 
-* We use several traditional techniques like PCA, PPCA, Incremental PCA for representing our 784 dimension image to a latent dimension of 392, 196, 98, 49, 24, 12, 6.
-* While these methods help us achieve a reduced dimensions statistically, we also explore newer methods such as Variational AutoEncoders.
-* Due to high compute required by our tasks (224 experiments), we do limited grid search and hope that our results can be generalised for a combination of Classifier and Dimensionality Reduction Technique.
+We use the following traditional techniques for dimentionality reduction for representing our 784 dimension image to a latent dimension of 392, 196, 98, 49, 24, 12, 6:
 
+* PCA
+* PPCA
+* Incremental PCA 
+
+
+While these methods help us achieve a reduced dimensions statistically, we also explore newer a deep learning modul like Variational AutoEncoders
+
+Due to high compute required by our tasks (224 experiments), we do limited grid search and hope that our results can be generalised for a combination of Classifier and Dimensionality Reduction Technique.
 
 # Variational AutoEncoders (VAE)
 
 Variational autoencoders (VAEs) are a deep learning technique for learning latent representations.
 
-We present the images reconstructed from the latent space learnt by the auto encoder. It is clear from the reconstruction of images that we don’t see much loss of information in the reduced dimensionality space We also showcase the transition b/w two
-labels using the hidden states, a capability which we gain because of the continuous nature of the latent space.
+We present the images reconstructed from the latent space learnt by the auto encoder. 
+It is clear from the reconstruction of images that we don’t see much loss of information in the reduced dimensionality space We also showcase the transition b/w two labels using the hidden states, a capability which we gain because of the continuous nature of the latent space.
 
 We can think of this transition as moving along the manifold of image features (think thickness, orientation, hand etc.)
 
