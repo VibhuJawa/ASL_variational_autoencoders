@@ -6,6 +6,7 @@ techniques perform in different latent space.
 The results from this process can help perform better computer vision tasks at smaller resolutions, with very limited
 computing power. One could implement computer vision in an inexpensive board computer like Raspberry Pi, and some Text-to-Speech to enabling improved and automated translation applications.
 
+# [Project Report](project_report.pdf)
 
 # Data Set
 
@@ -22,6 +23,7 @@ The output of the algorithm is the classification accuracy achieved on 24 classe
 * A random classifier would score nearly 4%.
 * A majority classifier would label everything E, thus giving 11%. 
 * All our models perform better than these models, with the worst model giving accuracies in the range of 85%, after dimensionality reduction.
+
 
 # Methods and Models
 
